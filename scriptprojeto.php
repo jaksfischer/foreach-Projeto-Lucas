@@ -33,6 +33,11 @@ for ($i = 0; $i <= $count; $i++) {
     echo("<br />");
 }
 
+/**
+* Fiz uma alteração no seu código. Troquei o while pelo foreach, desta forma, a cada posição do array que 
+* está dentro do $_POST ele irá enviar com a variável $nomeC.
+* Ele enviará o Json o mesmo número de vezes em que passar pelo foreach, mas isso ir resolver o seu problema.
+*/
 foreach ($_POST["nomeCompleto"] as $nomeC) {
     $api_url = "http://172.16.1.193/apirest.php";
     $user_token = "avDALXUppyhTaCPCeES200JFbL0y2SHvCzSwAqz8";
