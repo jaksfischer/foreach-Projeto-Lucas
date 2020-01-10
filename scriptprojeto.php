@@ -3,6 +3,7 @@
 if (isset($_POST['name'])) {
     $title = $_POST['name'];
 }
+//Pega os valores do POST para começar a trabalhar
 
 if (isset($_POST['desc'])) {
     $descrition = $_POST['desc'];
@@ -20,8 +21,10 @@ if (isset($_POST['cpf'])) {
     $cpf = $_POST['cpf'];
 }
 
+//Criamos um contador para poder trabalhar com o for
 $contador = count($nomes);
 
+//Variável que irá receber TUDO a partir de agora
 $dados = Array();
 for($i=0; $i < $contador; $i++) {
     $dados[$i] = Array("id" => $i, "Nome" => $nomes[$i], "Email" => $email[$i], "CPF" => $cpf[$i], "Descricao" => $descrition, "Titulo" => $title)
@@ -74,6 +77,7 @@ foreach ($dados as $nomeC) {
         'App-Token: ' . $app_token,
         'Session-Token: ' . $sess_token
     );
+    //Abaixo troquei os valores conforme eles virão para nós no array
     $input = '
         { "input": {
                 "name": "' . $nomeC['Titulo'] . ' ' . $nomeC['id'] . '",
