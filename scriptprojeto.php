@@ -9,6 +9,25 @@ if (isset($_POST['desc'])) {
 }
 
 if (isset($_POST['nomeCompleto'])) {
+    $nomes = $_POST['nomeCompleto'];
+}
+
+if (isset($_POST['email'])) {
+    $email = $_POST['email'];
+}
+
+if (isset($_POST['cpf'])) {
+    $cpf = $_POST['cpf'];
+}
+
+$contador = count($nomes);
+
+$dados = Array();
+for($i=0; $i < $contador; $i++) {
+    $dados[$i] = Array("id" => $i, "Nome" => $nomes[$i], "Email" => $email[$i], "CPF" => $cpf[$i], "Descricao" => $descrition, "Titulo" => $title)
+}
+
+if (isset($_POST['nomeCompleto'])) {
     foreach ($_POST["nomeCompleto"] as $nameC) {
         echo " => " . $nameC . "<BR>";
     }
@@ -38,7 +57,7 @@ for ($i = 0; $i <= $count; $i++) {
 * está dentro do $_POST ele irá enviar com a variável $nomeC.
 * Ele enviará o Json o mesmo número de vezes em que passar pelo foreach, mas isso ir resolver o seu problema.
 */
-foreach ($_POST["nomeCompleto"] as $nomeC) {
+foreach ($dados as $nomeC) {
     $api_url = "http://172.16.1.193/apirest.php";
     $user_token = "avDALXUppyhTaCPCeES200JFbL0y2SHvCzSwAqz8";
     $app_token = "W3kK8m43arM0K66H3GyZEKOQFZ7GcpUQ2ZX1HrSj";
@@ -57,8 +76,8 @@ foreach ($_POST["nomeCompleto"] as $nomeC) {
     );
     $input = '
         { "input": {
-                "name": "' . $title . ' ' . $i . '",
-                "content": "<b>NOME</b>: ' . $nomeC . '<br><b>CPF</b>: teste<br><b>Secretaria</b>:<br> ",
+                "name": "' . $nomeC['Titulo'] . ' ' . $nomeC['id'] . '",
+                "content": "<b>NOME</b>: ' . $nomeC['Nome'] . '<br><b>CPF</b>: ' . $nomeC['CPF'] . '<br><b>Secretaria</b>:<br> ",
                                 "status":"4",
                                 "urgency":"1",
                                 "priority":"4",
